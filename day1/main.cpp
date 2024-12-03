@@ -6,9 +6,15 @@
 #include <string>
 #include <vector>
 
-int calculate_distance(int val1, int val2)
+int calculate_distance(std::vector<int> list1, std::vector<int> list2)
 {
-    return std::abs(val1 - val2);
+    int total_distance = 0;
+    for(auto i = 0u; i < list1.size(); i++)
+    {
+        int distance = std::abs(list1[i] - list2[i]);;
+        total_distance += distance;
+    }
+    return total_distance;
 }
 
 int main()
@@ -16,7 +22,6 @@ int main()
     std::ifstream file("input.txt");
     std::string line;
     int val1, val2;
-    int total_distance = 0;
     std::vector<int> list1{};
     std::vector<int> list2{};
 
@@ -36,12 +41,7 @@ int main()
     std::sort(list1.begin(), list1.end());
     std::sort(list2.begin(), list2.end());
 
-    // calculating distances
-    for(auto i = 0u; i < list1.size(); i++)
-    {
-        int distance = calculate_distance(list1[i], list2[i]);
-        total_distance += distance;
-    }
+    int total_distance = calculate_distance(list1, list2);
 
     std::cout << "Total distance: " << total_distance << std::endl;
 
